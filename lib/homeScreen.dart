@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "sub": "Wendy’s Burger",
       "rating": 4.9,
       "img": "assets/images/b1.png",
+      "details": "The Cheeseburger Wendy's Burger is a classic fast food burger that packs a punch of flavor in every bite. Made with a juicy beef patty cooked to perfection, it's topped with melted American cheese, crispy lettuce, ripe tomato, and crunchy pickles.",
       "isFavorite": false,
     },
     {
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "sub": "Veggie Burger",
       "rating": 4.9,
       "img": "assets/images/b2.png",
+      "details":"Enjoy our delicious Hamburger Veggie Burger, made with a savory blend of fresh vegetables and herbs, topped with crisp lettuce, juicy tomatoes, and tangy pickles, all served on a soft, toasted bun. ",
       "isFavorite": false,
     },
     {
@@ -36,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "sub": "Chicken Burger",
       "rating": 4.8,
       "img": "assets/images/b3.png",
+      "details":"Our chicken burger is a delicious and healthier alternative to traditional beef burgers, perfect for those looking for a lighter meal option. Try it today and experience the mouth-watering flavors of our Hamburger Chicken Burger!",
       "isFavorite": false,
     },
     {
@@ -43,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "sub": "Wendy’s Burger",
       "rating": 4.7,
       "img": "assets/images/b4.png",
+      "details":"Indulge in our crispy and savory Fried Chicken Burger, made with a juicy chicken patty, hand-breaded and deep-fried to perfection, served on a warm bun with lettuce, tomato, and a creamy sauce.",
       "isFavorite": false,
     },
     {
@@ -50,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "sub": "Fried Chicken Burger",
       "rating": 4.6,
       "img": "assets/images/b1.png",
+      "details":"Indulge in our crispy and savory Fried Chicken Burger, made with a juicy chicken patty, hand-breaded and deep-fried to perfection, served on a warm bun with lettuce, tomato, and a creamy sauce.",
       "isFavorite": false,
     },
     {
@@ -57,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "sub": "Fried Chicken Burger",
       "rating": 4.6,
       "img": "assets/images/b4.png",
+      "details":"Enjoy our delicious Hamburger Veggie Burger, made with a savory blend of fresh vegetables and herbs, topped with crisp lettuce, juicy tomatoes, and tangy pickles, all served on a soft, toasted bun. ",
       "isFavorite": false,
     },
   ];
@@ -167,7 +173,6 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -188,8 +193,6 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
           const SizedBox(height: 20),
-
-          // Search bar
           Row(
             children: [
               Expanded(
@@ -207,7 +210,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   child: TextField(
-
                     decoration: InputDecoration(
                       hintText: "Search",
                       prefixIcon: const Icon(Icons.search),
@@ -234,7 +236,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 30),
 
-          // Categories
           SizedBox(
             height: 40,
             child: ListView.builder(
@@ -274,7 +275,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 20),
 
-          // Product Grid
           Expanded(
             child: GridView.builder(
               itemCount: products.length,
@@ -395,57 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Widget favoriteTab() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(18.0),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         const Text(
-  //           "Favorite Items",
-  //           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-  //         ),
-  //         const SizedBox(height: 10),
-  //         Expanded(
-  //           child: favoriteProducts.isEmpty
-  //               ? const Center(child: Text("No favorites yet."))
-  //               : ListView.builder(
-  //             itemCount: favoriteProducts.length,
-  //             itemBuilder: (context, index) {
-  //               final item = favoriteProducts[index];
-  //               return ListTile(
-  //                 leading: Image.asset(item["img"], width: 50),
-  //                 title: Text(item["name"]),
-  //                 subtitle: Text(item["sub"]),
-  //                 trailing: Row(
-  //                   mainAxisSize: MainAxisSize.min,
-  //                   children: [
-  //
-  //                     Text(
-  //                       item["rating"].toString(),
-  //                       style: const TextStyle(fontWeight: FontWeight.bold),
-  //                     ),
-  //                     SizedBox(width: 4,),
-  //                     const Icon(Icons.star, color: Colors.orange),
-  //
-  //                     IconButton(
-  //                       icon: const Icon(Icons.delete, color: Colors.red),
-  //                       onPressed: () {
-  //                         setState(() {
-  //                           favoriteProducts.removeAt(index);
-  //                         });
-  //                       },
-  //                     ),
-  //                   ],
-  //                 ),
-  //               );
-  //             },
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+
   Widget favoriteTab() {
     return Padding(
       padding: const EdgeInsets.all(18.0),
