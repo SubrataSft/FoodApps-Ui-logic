@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_apps/SplashScreen.dart';
 
-import 'SplashScreen.dart';
-
-void main(){
-  runApp(MyApp());
+void main() {
+  runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -14,9 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Food App",
-      home: SplashScreen(
-        
-      ),
+      home: const SplashScreen(),
     );
   }
 }

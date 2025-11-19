@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_apps/payment_page.dart';
+import 'package:food_apps/product-page.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final Map<String, dynamic> product;
@@ -11,6 +13,7 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int count = 1;
+  double sliderValue = 50;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +21,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade100,
+        centerTitle: true,
         actions: const [
           Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.search)),
         ],
-        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(18),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
@@ -38,103 +42,102 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             Text(
               widget.product["name"],
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
-
             Text(
               widget.product["sub"],
-              style:  TextStyle(fontSize: 16, color: Colors.grey),
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
-                 Icon(Icons.star, color: Colors.orange, size: 20),
-                 SizedBox(width: 4),
+                const Icon(Icons.star, color: Colors.orange, size: 20),
+                const SizedBox(width: 4),
                 Text(
                   widget.product["rating"].toString(),
-                  style:  TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
-              widget.product["details"].toString(),
-              style:  TextStyle(
+              widget.product["details"],
+              style: const TextStyle(
                 fontSize: 16,
                 height: 1.5,
                 color: Colors.black87,
               ),
             ),
-            const SizedBox(height: 40),
-            
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text("Spicy"),
-                    Divider(
-                      thickness: 12,
-                      indent: 20,
-                      endIndent: 20,
-                      color: Colors.redAccent,
+                    const Text("Spicy"),
+                    Slider(
+                      value: sliderValue,
+                      min: 0,
+                      max: 100,
+                      divisions: 100,
+                      label: sliderValue.round().toString(),
+                      onChanged: (value) {
+                        setState(() {
+                          sliderValue = value;
+                        });
+                      },
                     ),
-
-                    Text("Mis",style: TextStyle(color: Colors.green),),
+                    Row(
+                      children: [
+                        Text("Midd", style: TextStyle(color: Colors.green)),
+                        SizedBox(width: 120),
+                        Text("Hot",textAlign: TextAlign.end, style: TextStyle(color: Colors.red)),
+                      ],
+                    ),
                   ],
                 ),
-                
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          if (count > 1) count--;
-                        });
+                        if (count > 1) setState(() => count--);
                       },
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(40, 40),
                         backgroundColor: Colors.red,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: EdgeInsets.all(8),
+                        minimumSize: const Size(40, 40),
                       ),
-                      child: Icon(Icons.remove, color: Colors.white),
+                      child: const Icon(Icons.remove),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "$count",
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          if (count < 20) count++;
-                        });
+                        if (count < 20) setState(() => count++);
                       },
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(40, 40),
                         backgroundColor: Colors.red,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: EdgeInsets.all(8),
+                        minimumSize: const Size(40, 40),
                       ),
-                      child: Icon(Icons.add, color: Colors.white),
+                      child: const Icon(Icons.add),
                     ),
                   ],
                 ),
               ],
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -147,7 +150,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      "\$ ${(10 * count).toStringAsFixed(2)}",
+                      "\$${(10 * count).toStringAsFixed(2)}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -157,25 +160,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProductPage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     minimumSize: const Size(200, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
                   ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "OrderNow",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                  child: const Text(
+                    "OrderNow",
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ],
             ),
-           
           ],
         ),
       ),
